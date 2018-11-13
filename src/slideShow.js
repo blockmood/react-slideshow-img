@@ -20,6 +20,24 @@ class SlideShow extends React.Component{
         this.play()
     }
 
+    navigation(item) {
+        const {current,total} = this.state
+        const {speed} = this.props
+        clearInterval(this.interval)
+        this.interval  = setTimeout(()=>{
+            this.play()
+        },speed)
+        if(!item){
+            this.setState({
+                current: current == 0 ? total - 1 : current - 1
+            })
+        }else{
+            this.setState({
+                current:current == total - 1 ? 0 : current + 1
+            })
+        }
+    }
+
     play(){
         const {speed} = this.props
         this.interval = setInterval(()=>{
@@ -34,7 +52,7 @@ class SlideShow extends React.Component{
     }
 
     render(){
-        const {children,pagination} = this.props
+        const {children,pagination,navigation} = this.props
         const {current} = this.state
 
         return (
@@ -49,6 +67,13 @@ class SlideShow extends React.Component{
                     }
                 </div> : ''
                 }
+                {
+                    navigation ? <div>
+                            <div className="slideshow-button prev" onClick={this.navigation.bind(this,0)}></div>
+                            <div className="slideshow-button next" onClick={this.navigation.bind(this,1)}></div>
+                        </div>
+                        : ''
+                }
                 
             </div>
         )
@@ -57,7 +82,8 @@ class SlideShow extends React.Component{
 
 SlideShow.defaultProps = {
     speed:3000,
-    pagination:false
+    pagination:false,
+    navigation:false
 }
 
 export default SlideShow
