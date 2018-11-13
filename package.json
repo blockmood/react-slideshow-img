@@ -2,15 +2,18 @@
   "name": "react-slideshow-img",
   "version": "1.0.0",
   "description": "",
-  "main": "./dist/index.js",
+  "main": "./dist/slideShow.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "webpack-dev-server --open --mode development"
+    "start": "webpack-dev-server --open --mode development",
+    "transpile": "babel src -d dist",
+    "build": "npm run transpile"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@babel/cli": "^7.1.5",
     "@babel/core": "^7.1.5",
     "@babel/preset-env": "^7.1.5",
     "@babel/preset-react": "^7.0.0",
