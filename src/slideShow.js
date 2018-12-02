@@ -1,5 +1,5 @@
-import React, {Children } from 'react';
-import classnames from 'classnames'
+import React, {Children,PropTypes } from 'react';
+import CSSTransitionGroup  from 'react-addons-css-transition-group';
 import './slideshow.css'
 class SlideShow extends React.Component{
 
@@ -7,7 +7,8 @@ class SlideShow extends React.Component{
         super(...arguments)
         this.state = {
             current:0,
-            total:0
+            total:0,
+            flag:true
         }
     }
     
@@ -21,21 +22,32 @@ class SlideShow extends React.Component{
     }
 
     navigation(item) {
-        const {current,total} = this.state
-        const {speed} = this.props
+        const {current,total,flag} = this.state
+        const {speed,enterTimeout} = this.props
         clearInterval(this.interval)
         this.interval  = setTimeout(()=>{
             this.play()
         },speed)
-        if(!item){
-            this.setState({
-                current: current == 0 ? total - 1 : current - 1
-            })
-        }else{
-            this.setState({
-                current:current == total - 1 ? 0 : current + 1
-            })
+        if(flag){
+            if(!item){
+                this.setState({
+                    current: current == 0 ? total - 1 : current - 1,
+                    flag:false
+                })
+            }else{
+                this.setState({
+                    current:current == total - 1 ? 0 : current + 1,
+                    flag:false
+                })
+            }
+
+            setTimeout(()=>{
+                this.setState({
+                    flag:true
+                })
+            },enterTimeout)
         }
+
     }
 
     play(){
@@ -68,7 +80,22 @@ class SlideShow extends React.Component{
 
         return (
             <div className="slideshow-wrapper">
-                {Children.toArray(children)[current]}
+                {
+                    isAnimation ? 
+                
+                <div className="slideshow-content">
+                    <CSSTransitionGroup
+                        transitionName="slideshow-image-item"
+                        transitionLeave={true}
+                        component="div"
+                        transitionEnterTimeout={enterTimeout}
+                        transitionLeaveTimeout={10}
+                    >
+                        {Children.toArray(children)[current]}
+                    </CSSTransitionGroup>
+                </div>
+                : Children.toArray(children)[current]
+                }
                 {
                     pagination ? <div className="slideshow-pagination-bullets">
                     {
@@ -96,7 +123,9 @@ class SlideShow extends React.Component{
 SlideShow.defaultProps = {
     speed:3000,
     pagination:false,
-    navigation:false
+    navigation:false,
+    enterTimeout:500,
+    isAnimation:true
 }
 
 export default SlideShow

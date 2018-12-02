@@ -1,6 +1,6 @@
 {
   "name": "react-slideshow-img",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "",
   "main": "./dist/slideShow.js",
   "scripts": {
@@ -23,7 +23,9 @@
     "css-loader": "^1.0.1",
     "html-webpack-plugin": "^3.2.0",
     "react": "^16.6.3",
+    "react-addons-css-transition-group": "^15.6.2",
     "react-dom": "^16.6.3",
+    "react-transition-group": "^2.5.0",
     "style-loader": "^0.23.1",
     "webpack": "^4.25.1",
     "webpack-cli": "^3.1.2",
