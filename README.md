@@ -26,3 +26,4 @@ const list = [img1,img2]
 | speed | 播放速度 | 3000 |
 | pagination | 小圆点 | false |
 | navigation | 左右按钮 | false |
+| pagClick | 按钮点击 | true |

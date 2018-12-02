@@ -47,12 +47,23 @@ class SlideShow extends React.Component{
         },speed)
     }
 
+    handleClick(index){
+        const {speed} = this.props
+        clearInterval(this.interval)
+        this.setState({
+            current:index
+        })
+        this.interval  = setTimeout(()=>{
+            this.play()
+        },speed)
+    }
+
     componentWillUnmount(){
         clearInterval(this.interval)
     }
 
     render(){
-        const {children,pagination,navigation} = this.props
+        const {children,pagination,navigation,pagClick} = this.props
         const {current} = this.state
 
         return (
@@ -62,7 +73,9 @@ class SlideShow extends React.Component{
                     pagination ? <div className="slideshow-pagination-bullets">
                     {
                         Children.toArray(children).map((item,index) =>
-                            <span key={index} className={ current == index ? 'slideshow-pagination-bullet active' : 'slideshow-pagination-bullet'}></span>       
+                            <span key={index}
+                            onClick={pagClick ? this.handleClick.bind(this,index) : ()=>{}}  
+                            className={ current == index ? 'slideshow-pagination-bullet active' : 'slideshow-pagination-bullet'}></span>       
                             )
                     }
                 </div> : ''

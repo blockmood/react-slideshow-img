@@ -12,6 +12,7 @@ import SlideShow from '../../src/slideShow'
                 speed={3000}
                 pagination={true}
                 navigation={true}
+                pagClick={false}
              >
                  <a href=""><img src="http://cdn.ydma.cn/2018-11-03-Km03e16Y" alt=""/></a>
                  <a href=""><img src="http://cdn.ydma.cn/2018-08-21-SilFxmQF" alt=""/></a>
