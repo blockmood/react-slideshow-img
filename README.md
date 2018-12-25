@@ -1,4 +1,4 @@
-# react-slideshow-img （react 轮播图组件）
+# react-slideshow-img
 
 ## 使用
 
