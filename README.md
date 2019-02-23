@@ -3,7 +3,7 @@
 ## 使用
 
 ```
-npm install react-addons-css-transition-group react-slideshow-img -S
+npm install react-slideshow-img -S
 ```
 
 ```
